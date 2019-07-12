@@ -2,14 +2,14 @@ version: '2.2'
 
 services:
 
-  geth:
-    image: ethereum/client-go:latest
-    command: --goerli --metrics --metrics.expensive --pprof --pprofaddr=0.0.0.0
+  gonex:
+    image: nextyio/gonex:latest
+    command: --testnet --metrics --metrics.expensive --pprof --pprofaddr=0.0.0.0
 
   prometheus:
     image: prom/prometheus
     depends_on:
-      geth:
+      gonex:
         condition: service_started
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
